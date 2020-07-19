@@ -5,13 +5,13 @@ app.use(cors());
 
 const products = require("./products");
 
-app.get("/", (request, respond) => {
+app.get("/", (req, res) => {
     console.log("Hello");
-    respond.json({ message: "Hello World" });
+    res.json({ message: "Hello World" });
 });
 
-app.get("/products", (request, respond) => {
-    respond.json(products);
+app.get("/products", (req, res) => {
+    res.json(products);
 });
 
 app.listen(8000, () => {
