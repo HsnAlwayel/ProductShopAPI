@@ -16,6 +16,7 @@ app.get("/products", (req, res) => {
     res.json(products);
 });
 
+//Create
 app.post("/products", (req, res) => {
     console.log(req.body);
     const id = products[products.length - 1].id + 1;
@@ -24,19 +25,19 @@ app.post("/products", (req, res) => {
     res.status(201).json(newProduct);
 })
 
+//Update
 app.put("/products/:productId", (req, res) => {
     const { productId } = req.params;
     const foundProduct = products.find((product) => product.id === +productId)
     if (foundProduct) {
-        foundProduct.name = req.body.name;
-        foundProduct.price = req.body.price;
-        foundProduct.image = req.body.image;
+        for (const key in req.body) foundProduct[key] = req.body[key];
         console.log(products);
         res.status(204).end();
     }
     else { res.status(404).json({ message: "Product not Found!" }); }
 });
 
+//Delete
 app.delete("/products/:productId", (req, res) => {
     const { productId } = req.params;
     const foundProduct = products.find((product) => product.id === +productId)
@@ -47,6 +48,8 @@ app.delete("/products/:productId", (req, res) => {
         res.status(404).json({ message: "Product not found!" });
     }
 });
+
+//localhost:8000
 app.listen(8000, () => {
     console.log("The application is running on localhost:8000");
 });
