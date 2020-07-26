@@ -1,6 +1,16 @@
 let products = require("../products");
 const { Product } = require("../db/models.js");
 
+//Fetch
+exports.fetchProduct = async (productId) => {
+    try {
+        const product = await Product.findByPk(productId);
+        return product;
+    } catch (error) {
+        next(error)
+    }
+};
+
 //Create
 exports.productCreate = async (req, res, next) => {
     try {
@@ -11,6 +21,7 @@ exports.productCreate = async (req, res, next) => {
     }
 };
 
+//List
 exports.productList = async (req, res, next) => {
     try {
         const products = await Product.findAll({
@@ -22,36 +33,21 @@ exports.productList = async (req, res, next) => {
     }
 };
 
+//Update
 exports.productUpdate = async (req, res, next) => {
-    const { productId } = req.params;
     try {
-        const foundProduct = await Product.findByPk(productId);
-        if (foundProduct) {
-            await foundProduct.update(req.body);
-            res.status(204).end();
-        }
-        else {
-            const err = new Error("Product Not Found");
-            err.status = 404;
-            next(err);
-        }
+        await req.product.update(req.body);
+        res.status(204).end();
     } catch (error) {
-        next(error);
+        next(error)
     }
 };
+
+//Delete
 exports.productDelete = async (req, res, next) => {
-    const { productId } = req.params;
     try {
-        const foundProduct = await Product.findByPk(productId);
-        if (foundProduct) {
-            await foundProduct.destroy();
-            res.status(204).end();
-        }
-        else {
-            const err = new Error("Product Not Found");
-            err.status = 404;
-            next(err);
-        }
+        await req.product.destroy();
+        res.status(204).end();
     } catch (error) {
         next(error)
     }
