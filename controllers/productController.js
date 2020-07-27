@@ -14,6 +14,11 @@ exports.fetchProduct = async (productId) => {
 //Create
 exports.productCreate = async (req, res, next) => {
     try {
+        if (req.file) {
+            req.body.image = `${req.protocol}://${req.get("host")}/media/${
+                req.file.filename
+                }`;
+        }
         const newProduct = await Product.create(req.body);
         res.status(201).json(newProduct);
     } catch (error) {
@@ -36,6 +41,11 @@ exports.productList = async (req, res, next) => {
 //Update
 exports.productUpdate = async (req, res, next) => {
     try {
+        if (req.file) {
+            req.body.image = `${req.protocol}://${req.get("host")}/media/${
+                req.file.filename
+                }`;
+        }
         await req.product.update(req.body);
         res.status(204).end();
     } catch (error) {

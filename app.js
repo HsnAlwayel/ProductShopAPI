@@ -5,17 +5,17 @@ const db = require("./db/db");
 const { Product } = require("./db/models.js");
 //Routes
 const productRoutes = require("./routes/products");
-
 //Express instance
 const app = express();
 
-
+const path = require("path");
+console.log("hii", path.join(__dirname, "media"));
 const run = async () => {
     try {
-        await db.sync({ alter: true });
+        await db.sync();
         console.log("Connection to the database successful!");
-        // const newProduct = await Product.create({ name: "ProductT" });
     } catch (error) {
+
         console.error("Error connecting to the database: ", error);
     }
 
@@ -36,6 +36,7 @@ app.use((req, res, next) => {
 
 //Routers
 app.use("/products", productRoutes);
+app.use("/media", express.static(path.join(__dirname, "media")));
 
 // No Path Found
 app.use((req, res, next) => {
