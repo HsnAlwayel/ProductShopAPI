@@ -1,5 +1,5 @@
-let products = require("../products");
-const { Product } = require("../db/models.js");
+const { Product, Vendor } = require("../db/models.js");
+const { model } = require("../db/db.js");
 
 //Fetch
 exports.fetchProduct = async (productId) => {
@@ -11,26 +11,18 @@ exports.fetchProduct = async (productId) => {
     }
 };
 
-//Create
-exports.productCreate = async (req, res, next) => {
-    try {
-        if (req.file) {
-            req.body.image = `${req.protocol}://${req.get("host")}/media/${
-                req.file.filename
-                }`;
-        }
-        const newProduct = await Product.create(req.body);
-        res.status(201).json(newProduct);
-    } catch (error) {
-        next(error);
-    }
-};
+
 
 //List
 exports.productList = async (req, res, next) => {
     try {
         const products = await Product.findAll({
             attributes: { exclude: ["createdAt", "updatedAt"] },
+            include: {
+                model: Vendor,
+                as: "vendor",
+                attributes: ["name"],
+            }
         });
         res.json(products);
     } catch (error) {

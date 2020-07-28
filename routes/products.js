@@ -4,7 +4,6 @@ const upload = require("../middleware/multer");
 
 const {
     productList,
-    productCreate,
     productUpdate,
     productDelete,
     fetchProduct,
@@ -24,9 +23,6 @@ router.param("productId", async (req, res, next, productId) => {
 });
 //List
 router.get("/", productList);
-
-//Create
-router.post("/", upload.single("image"), productCreate);
 
 //Update
 router.put("/:productId", upload.single("image"), productUpdate);

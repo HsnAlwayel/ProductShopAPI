@@ -30,6 +30,7 @@ Product.init({
         sequelize: db,
     }
 );
+
 SequelizeSlugify.slugifyModel(Product, {
     source: [`name`]
 });
