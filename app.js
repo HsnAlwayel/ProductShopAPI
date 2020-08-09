@@ -6,6 +6,7 @@ const db = require("./db/db");
 //Routes
 const productRoutes = require("./routes/products");
 const vendorRoutes = require("./routes/Vendors")
+const userRoutes = require("./routes/users");
 
 //Express instance
 const app = express();
@@ -40,6 +41,7 @@ app.use((req, res, next) => {
 app.use("/vendors", vendorRoutes);
 app.use("/products", productRoutes);
 app.use("/media", express.static(path.join(__dirname, "media")));
+app.use(userRoutes);
 
 // No Path Found
 app.use((req, res, next) => {
