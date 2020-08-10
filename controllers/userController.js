@@ -1,4 +1,4 @@
-const { User } = require("../db/models.js");
+const { User } = require("../db/models/index.js");
 const bcrypt = require("bcrypt");
 
 exports.signup = async (req, res, next) => {
@@ -13,3 +13,7 @@ exports.signup = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.signin = (req, res) => {
+    console.log("exports.signin->", req);
+}

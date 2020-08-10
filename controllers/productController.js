@@ -1,4 +1,4 @@
-const { Product, Vendor } = require("../db/models.js");
+const { Product, Vendor } = require("../db/models/index.js");
 const { model } = require("../db/db.js");
 
 //Fetch

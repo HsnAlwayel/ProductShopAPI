@@ -1,4 +1,4 @@
-const { Vendor, Product } = require("../db/models.js/index.js");
+const { Vendor, Product } = require("../db/models/index.js");
 
 //Fetch
 exports.fetchVendor = async (vendorId, next) => {
