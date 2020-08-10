@@ -13,9 +13,22 @@ User.init(
                 msg: "Username already exists"
             }
         },
+        firstName: {
+            type: DataTypes.STRING,
+        },
+        lastName: {
+            type: DataTypes.STRING,
+        },
+        email: {
+            type: DataTypes.STRING,
+        },
         password: {
             type: DataTypes.STRING,
             allowNull: false,
+        },
+        role: {
+            type: DataTypes.STRING,
+            defaultValue: "customer",
         },
     },
     {

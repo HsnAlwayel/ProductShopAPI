@@ -20,7 +20,7 @@ passport.use(localStrategy);
 
 const run = async () => {
     try {
-        await db.sync();
+        await db.sync({ alter: true });
         console.log("Connection to the database successful!");
     } catch (error) {
 
