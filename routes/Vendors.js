@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/multer");
+const passport = require("passport");
 
 const {
     vendorList,
@@ -27,7 +28,7 @@ router.param("vendorId", async (req, res, next, vendorId) => {
 router.get("/", vendorList);
 
 //Create
-router.post("/", upload.single("image"), vendorCreate);
+router.post("/", passport.authenticate("jwt", { session: false }), upload.single("image"), vendorCreate);
 
 //Update
 router.put("/:vendorId", upload.single("image"), vendorUpdate);

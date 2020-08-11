@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const db = require("./db/db");
 const passport = require("passport");
-const { localStrategy } = require("./middleware/passport");
+const { localStrategy, jwtStrategy } = require("./middleware/passport");
 
 //Routes
 const productRoutes = require("./routes/products");
@@ -17,10 +17,11 @@ const path = require("path");
 
 app.use(passport.initialize());
 passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 const run = async () => {
     try {
-        await db.sync({ alter: true });
+        await db.sync();
         console.log("Connection to the database successful!");
     } catch (error) {
 
