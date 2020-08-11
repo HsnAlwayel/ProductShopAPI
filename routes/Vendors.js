@@ -31,13 +31,13 @@ router.get("/", vendorList);
 router.post("/", passport.authenticate("jwt", { session: false }), upload.single("image"), vendorCreate);
 
 //Update
-router.put("/:vendorId", upload.single("image"), vendorUpdate);
+router.put("/:vendorId", passport.authenticate("jwt", { session: false }), upload.single("image"), vendorUpdate);
 
 //Delete
-router.delete("/:vendorId", vendorDelete);
+router.delete("/:vendorId", passport.authenticate("jwt", { session: false }), vendorDelete);
 
 //Create Product
-router.post("/:vendorId/products", upload.single("image"), productCreate);
+router.post("/:vendorId/products", passport.authenticate("jwt", { session: false }), upload.single("image"), productCreate);
 
 
 module.exports = router;
