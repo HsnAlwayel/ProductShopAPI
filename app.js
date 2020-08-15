@@ -53,6 +53,7 @@ app.use(userRoutes);
 app.use((req, res, next) => {
     res.status(404).json("Path not found");
 })
+
 //Error Handeling MiddleWare
 app.use((err, req, res, next) => {
     res.status(err.status || 500);
@@ -61,9 +62,10 @@ app.use((err, req, res, next) => {
     });
 });
 
-
+//Hekaro Port
+const PORT = process.env.PORT || 8001;
 
 //localhost:8000
-app.listen(8001, () => {
-    console.log("The application is running on localhost:8000");
+app.listen(Port, () => {
+    console.log(`The application is running on localhost:${Port}`);
 });
