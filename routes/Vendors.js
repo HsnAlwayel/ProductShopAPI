@@ -28,16 +28,32 @@ router.param("vendorId", async (req, res, next, vendorId) => {
 router.get("/", vendorList);
 
 //Create
-router.post("/", passport.authenticate("jwt", { session: false }), upload.single("image"), vendorCreate);
+router.post(
+    "/",
+    passport.authenticate("jwt", { session: false }),
+    upload.single("image"),
+    vendorCreate);
 
 //Update
-router.put("/:vendorId", passport.authenticate("jwt", { session: false }), upload.single("image"), vendorUpdate);
+router.put(
+    "/:vendorId",
+    passport.authenticate("jwt", { session: false }),
+    upload.single("image"),
+    vendorUpdate,
+);
 
 //Delete
-router.delete("/:vendorId", passport.authenticate("jwt", { session: false }), vendorDelete);
+router.delete(
+    "/:vendorId",
+    passport.authenticate("jwt", { session: false }),
+    vendorDelete);
 
 //Create Product
-router.post("/:vendorId/products", passport.authenticate("jwt", { session: false }), upload.single("image"), productCreate);
+router.post(
+    "/:vendorId/products",
+    passport.authenticate("jwt", { session: false }),
+    upload.single("image"),
+    productCreate);
 
 
 module.exports = router;

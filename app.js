@@ -38,10 +38,10 @@ run();
 app.use(cors());
 app.use(bodyParser.json());
 
-app.use((req, res, next) => {
-    console.log("im a middleware method");
-    next();
-});
+// app.use((req, res, next) => {
+//     console.log("im a middleware method");
+//     next();
+// });
 
 //Routers Use
 app.use("/vendors", vendorRoutes);

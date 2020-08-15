@@ -1,4 +1,4 @@
-const { User } = require("../db/models/index.js");
+const { User, Vendor } = require("../db/models/index.js");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET, JWT_EXPIRATION_MS } = require("../config/keys");
@@ -26,8 +26,9 @@ exports.signup = async (req, res, next) => {
     }
 };
 
-exports.signin = (req, res) => {
+exports.signin = async (req, res) => {
     const { user } = req;
+    const vendor = await Vendor.findOne({ where: { userId: user.id } });
     const payload = {
         id: user.id,
         username: user.username,
@@ -35,6 +36,7 @@ exports.signin = (req, res) => {
         firstName: user.firstName,
         lastName: user.lastName,
         role: user.role,
+        vendorSlug: vendor ? vendor.slug : null,
         expires: Date.now() + parseInt(JWT_EXPIRATION_MS),
     };
     const token = jwt.sign(JSON.stringify(payload), JWT_SECRET);
