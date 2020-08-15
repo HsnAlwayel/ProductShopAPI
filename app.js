@@ -63,9 +63,9 @@ app.use((err, req, res, next) => {
 });
 
 //Hekaro Port
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8001;
 
 //localhost:8000
-app.listen(Port, () => {
-    console.log(`The application is running on localhost:${Port}`);
+app.listen(PORT, () => {
+    console.log(`The application is running on localhost:${PORT}`);
 });
