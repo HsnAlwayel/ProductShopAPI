@@ -10,7 +10,7 @@ const {
     vendorDelete,
     fetchVendor,
     productCreate,
-} = require("../controllers/vendorController");
+} = require("../controllers/VendorController");
 
 //Param
 router.param("vendorId", async (req, res, next, vendorId) => {
