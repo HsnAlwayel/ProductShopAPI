@@ -9,6 +9,7 @@ const { localStrategy, jwtStrategy } = require("./middleware/passport");
 const productRoutes = require("./routes/products");
 const vendorRoutes = require("./routes/Vendors")
 const userRoutes = require("./routes/users");
+const orderRoutes = require("./routes/orders");
 
 //Express instance
 const app = express();
@@ -21,7 +22,7 @@ passport.use(jwtStrategy);
 
 const run = async () => {
     try {
-        await db.sync();
+        await db.sync({ alter: true });
         console.log("Connection to the database successful!");
     } catch (error) {
 
@@ -43,6 +44,7 @@ app.use(bodyParser.json());
 app.use("/vendors", vendorRoutes);
 app.use("/products", productRoutes);
 app.use("/media", express.static(path.join(__dirname, "media")));
+app.use(orderRoutes);
 app.use(userRoutes);
 
 // No Path Found
