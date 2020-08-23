@@ -1,3 +1,5 @@
+const { Order, OrderItem } = require("../db/models/index.js");
+
 exports.checkout = async (req, res, next) => {
     try {
         const newOrder = await Order.create({ userId: req.user.id });
